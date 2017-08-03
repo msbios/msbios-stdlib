@@ -1,0 +1,44 @@
+{
+  "name": "msbios/stdlib",
+  "description": "MSBios Stblib",
+  "license": "GPL",
+  "keywords": [
+    "php"
+  ],
+  "homepage": "https://github.com/msbios/msbios-stdlib",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Judzhin Miles",
+      "email": "info@msbios.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MSBios\\Stdlib\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MSBiosTest\\Stdlib\\": "tests/"
+    }
+  },
+  "require": {
+    "zendframework/zend-stdlib": "^3.1",
+    "zendframework/zend-json": "^3.0"
+  },
+  "require-dev": {
+    "zendframework/zend-test": "^3.1",
+    "phpunit/phpunit": "^5.7",
+    "squizlabs/php_codesniffer": "^3.0"
+  },
+  "scripts": {
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "test": [
+      "@cs-check",
+      "phpunit"
+    ],
+    "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
+  }
+}
