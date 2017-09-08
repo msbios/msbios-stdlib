@@ -43,11 +43,13 @@ class ArrayCollection implements
      */
     public static function make($items)
     {
-        if (is_null($items))
+        if (is_null($items)) {
             return new static;
+        }
 
-        if ($items instanceof ArrayCollectionInterface)
+        if ($items instanceof ArrayCollectionInterface) {
             return $items;
+        }
 
         return new static(is_array($items) ? $items : [$items]);
     }
@@ -91,7 +93,9 @@ class ArrayCollection implements
     public function diff($items)
     {
         return new static(array_diff(
-            $this->items, $this->getArrayableItems($items))
+            $this->items,
+            $this->getArrayableItems($items)
+        )
         );
     }
 
@@ -104,7 +108,8 @@ class ArrayCollection implements
     public function each(\Closure $callback)
     {
         array_map(
-            $callback, $this->items
+            $callback,
+            $this->items
         );
         return $this;
     }
@@ -227,7 +232,9 @@ class ArrayCollection implements
      */
     public function implode($value, $glue = null)
     {
-        if (is_null($glue)) return implode($this->lists($value));
+        if (is_null($glue)) {
+            return implode($this->lists($value));
+        }
 
         return implode($glue, $this->lists($value));
     }
@@ -439,10 +446,12 @@ class ArrayCollection implements
      */
     public function sortBy($callback, $options = SORT_REGULAR, $descending = false)
     {
-        $results = array();
+        $results = [];
 
-        if (is_string($callback)) $callback =
+        if (is_string($callback)) {
+            $callback =
             $this->valueRetriever($callback);
+        }
 
         // First we will loop through the items and get the comparator from a callback
         // function which we were given. Then, we will sort the returned values and
@@ -486,7 +495,7 @@ class ArrayCollection implements
      * @param array $replacement
      * @return static
      */
-    public function splice($offset, $length = 0, $replacement = array())
+    public function splice($offset, $length = 0, $replacement = [])
     {
         return new static(array_splice($this->items, $offset, $length, $replacement));
     }
@@ -506,7 +515,6 @@ class ArrayCollection implements
 
         return $this->reduce(function ($result, $item) use ($callback) {
             return $result += $callback($item);
-
         }, 0);
     }
 
@@ -518,7 +526,9 @@ class ArrayCollection implements
      */
     public function take($limit = null)
     {
-        if ($limit < 0) return $this->slice($limit, abs($limit));
+        if ($limit < 0) {
+            return $this->slice($limit, abs($limit));
+        }
 
         return $this->slice(0, $limit);
     }
@@ -580,7 +590,6 @@ class ArrayCollection implements
     {
         return array_map(function ($value) {
             return $value;
-
         }, $this->items);
     }
 
@@ -708,5 +717,4 @@ class ArrayCollection implements
 
         return $items;
     }
-
 }

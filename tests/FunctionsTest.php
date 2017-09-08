@@ -18,6 +18,5 @@ class FunctionsTest extends TestCase
      */
     public function testGetAutoloaderConfig()
     {
-
     }
 }

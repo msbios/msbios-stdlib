@@ -9,6 +9,7 @@ namespace MSBios\Stdlib;
  * Interface ArrayCollectionInterface
  * @package MSBios\Stdlib
  */
-interface ArrayCollectionInterface {
+interface ArrayCollectionInterface
+{
 
 }

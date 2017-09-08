@@ -27,5 +27,7 @@
 
     <!-- Paths to check -->
     <file>src</file>
+    <file>functions.php</file>
+    <file>helpers.php</file>
     <file>tests</file>
 </ruleset>

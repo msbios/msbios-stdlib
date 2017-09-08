@@ -4,7 +4,7 @@
  * @author Judzhin Miles <info[woof-woof]msbios.com>
  */
 
-if (!function_exists('print_w')) {
+if (! function_exists('print_w')) {
     /**
      * @param $data
      */
@@ -16,7 +16,7 @@ if (!function_exists('print_w')) {
     }
 }
 
-if (!function_exists('exception_as_string')) {
+if (! function_exists('exception_as_string')) {
     /**
      * @param $exception
      * @return string
@@ -28,7 +28,7 @@ if (!function_exists('exception_as_string')) {
         foreach ($exception->getTrace() as $frame) {
             $args = "";
             if (isset($frame['args'])) {
-                $args = array();
+                $args = [];
                 foreach ($frame['args'] as $arg) {
                     if (is_string($arg)) {
                         $args[] = "'" . $arg . "'";
@@ -48,19 +48,21 @@ if (!function_exists('exception_as_string')) {
                 }
                 $args = join(", ", $args);
             }
-            $rtn .= sprintf("#%s %s(%s): %s(%s)\n",
+            $rtn .= sprintf(
+                "#%s %s(%s): %s(%s)\n",
                 $count,
                 $frame['file'],
                 $frame['line'],
                 $frame['function'],
-                $args);
+                $args
+            );
             $count++;
         }
         return get_class($exception) . ": " . $exception->getMessage() . "\nStacktrace:\n" . $rtn;
     }
 }
 
-if (!function_exists('starts_with')) {
+if (! function_exists('starts_with')) {
     /**
      * @param $haystack
      * @param $needle
@@ -73,7 +75,7 @@ if (!function_exists('starts_with')) {
     }
 }
 
-if (!function_exists('ends_with')) {
+if (! function_exists('ends_with')) {
     /**
      * @param $haystack
      * @param $needle
@@ -86,7 +88,7 @@ if (!function_exists('ends_with')) {
     }
 }
 
-if (!function_exists('is_true')) {
+if (! function_exists('is_true')) {
     /**
      * @param $mixed
      * @return mixed
@@ -97,7 +99,7 @@ if (!function_exists('is_true')) {
     }
 }
 
-if (!function_exists('is_false')) {
+if (! function_exists('is_false')) {
 
     /**
      * @param $mixed
@@ -105,11 +107,11 @@ if (!function_exists('is_false')) {
      */
     function is_false($mixed)
     {
-        return !is_true($mixed);
+        return ! is_true($mixed);
     }
 }
 
-if (!function_exists('is_assoc')) {
+if (! function_exists('is_assoc')) {
 
     /**
      * @param $array
@@ -121,7 +123,7 @@ if (!function_exists('is_assoc')) {
     }
 }
 
-if (!function_exists('value')) {
+if (! function_exists('value')) {
     /**
      * Return the default value of the given value.
      *
@@ -134,7 +136,7 @@ if (!function_exists('value')) {
     }
 }
 
-if (!function_exists('random_key')) {
+if (! function_exists('random_key')) {
     /**
      * @param int $size
      * @return string
@@ -157,7 +159,7 @@ if (!function_exists('random_key')) {
     }
 }
 
-if (!function_exists('json_escape')) {
+if (! function_exists('json_escape')) {
     /**
      * @param $input
      * @param bool $esc_html
@@ -166,11 +168,11 @@ if (!function_exists('json_escape')) {
     function json_escape($input, $esc_html = true)
     {
         $result = '';
-        if (!is_string($input)) {
+        if (! is_string($input)) {
             $input = (string)$input;
         }
 
-        $conv = array("\x08" => '\\b', "\t" => '\\t', "\n" => '\\n', "\f" => '\\f', "\r" => '\\r', '"' => '\\"', '\\' => '\\\\');
+        $conv = ["\x08" => '\\b', "\t" => '\\t', "\n" => '\\n', "\f" => '\\f', "\r" => '\\r', '"' => '\\"', '\\' => '\\\\'];
         if ($esc_html) {
             $conv['<'] = '\\u003C';
             $conv['>'] = '\\u003E';
@@ -179,7 +181,7 @@ if (!function_exists('json_escape')) {
         for ($i = 0, $len = strlen($input); $i < $len; $i++) {
             if (isset($conv[$input[$i]])) {
                 $result .= $conv[$input[$i]];
-            } else if ($input[$i] < ' ') {
+            } elseif ($input[$i] < ' ') {
                 $result .= sprintf('\\u%04x', ord($input[$i]));
             } else {
                 $result .= $input[$i];
@@ -190,7 +192,7 @@ if (!function_exists('json_escape')) {
     }
 }
 
-if (!function_exists('array_clone')) {
+if (! function_exists('array_clone')) {
 
     /**
      * @param $array
@@ -208,7 +210,7 @@ if (!function_exists('array_clone')) {
     }
 }
 
-if (!function_exists('after')) {
+if (! function_exists('after')) {
     /**
      * @param $needle
      * @param $haystack
@@ -216,12 +218,13 @@ if (!function_exists('after')) {
      */
     function after($needle, $haystack)
     {
-        if (!is_bool(strpos($haystack, $needle)))
+        if (! is_bool(strpos($haystack, $needle))) {
             return substr($haystack, strpos($haystack, $needle) + strlen($needle));
+        }
     }
 }
 
-if (!function_exists('after_last')) {
+if (! function_exists('after_last')) {
     /**
      * @param $needle
      * @param $haystack
@@ -229,12 +232,13 @@ if (!function_exists('after_last')) {
      */
     function after_last($needle, $haystack)
     {
-        if (!is_bool(strrevpos($haystack, $needle)))
+        if (! is_bool(strrevpos($haystack, $needle))) {
             return substr($haystack, strrevpos($haystack, $needle) + strlen($needle));
+        }
     }
 }
 
-if (!function_exists('before')) {
+if (! function_exists('before')) {
     /**
      * @param $needle
      * @param $haystack
@@ -246,7 +250,7 @@ if (!function_exists('before')) {
     }
 }
 
-if (!function_exists('before_last')) {
+if (! function_exists('before_last')) {
     /**
      * @param $needle
      * @param $haystack
@@ -258,7 +262,7 @@ if (!function_exists('before_last')) {
     }
 }
 
-if (!function_exists('between')) {
+if (! function_exists('between')) {
     /**
      * @param $thisNeddle
      * @param $thatNeedle
@@ -271,7 +275,7 @@ if (!function_exists('between')) {
     }
 }
 
-if (!function_exists('beetween_last')) {
+if (! function_exists('beetween_last')) {
     /**
      * @param $thisNeedle
      * @param $thatNeedle
@@ -284,7 +288,7 @@ if (!function_exists('beetween_last')) {
     }
 }
 
-if (!function_exists('strrevpos')) {
+if (! function_exists('strrevpos')) {
     /**
      * @param $instr
      * @param $needle
@@ -293,7 +297,10 @@ if (!function_exists('strrevpos')) {
     function strrevpos($instr, $needle)
     {
         $rev_pos = strpos(strrev($instr), strrev($needle));
-        if ($rev_pos === false) return false;
-        else return strlen($instr) - $rev_pos - strlen($needle);
+        if ($rev_pos === false) {
+            return false;
+        } else {
+            return strlen($instr) - $rev_pos - strlen($needle);
+        }
     }
 }
