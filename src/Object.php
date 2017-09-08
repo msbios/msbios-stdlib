@@ -40,11 +40,12 @@ abstract class Object
 
     /**
      * @param $id
-     * @return Object
+     * @return $this
      */
-    protected function setId($id)
+    public function setId($id)
     {
-        return $this->setData('id', $id);
+        $this->setData('id', $id);
+        return $this;
     }
 
     /**
@@ -67,15 +68,17 @@ abstract class Object
 
     /**
      * Add data to the object.
-     *
      * Retains previous data in the object.
      *
-     * @param array $arr Data
-     *
-     * @return void
+     * @param array $arr
+     * @return $this
      */
     public function addData(array $arr)
     {
+        /**
+         * @var int $index
+         * @var mixed $value
+         */
         foreach ($arr as $index => $value) {
             $this->setData($index, $value);
         }
@@ -214,16 +217,16 @@ abstract class Object
         if (empty($array)) {
             return $this->data;
         }
-        /** @var array $arrayResult */
-        $arrayResult = [];
-        foreach ($array as $attribute) {
-            if (isset($this->data[$attribute])) {
-                $arrayResult[$attribute] = $this->data[$attribute];
+        /** @var array $result */
+        $result = [];
+        foreach ($array as $attr) {
+            if (isset($this->data[$attr])) {
+                $result[$attr] = $this->data[$attr];
             } else {
-                $arrayResult[$attribute] = null;
+                $result[$attr] = null;
             }
         }
-        return $arrayResult;
+        return $result;
     }
 
     /**
@@ -498,15 +501,5 @@ abstract class Object
         $newdata = $this->getData($field);
         $origdata = $this->getOrigData($field);
         return $newdata != $origdata;
-    }
-
-    /**
-     * Current Object name
-     *
-     * @return string
-     */
-    public function getClassName()
-    {
-        return get_class($this);
     }
 }
