@@ -16,7 +16,10 @@
   "autoload": {
     "psr-4": {
       "MSBios\\Stdlib\\": "src/"
-    }
+    },
+    "files": [
+      "functions.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
