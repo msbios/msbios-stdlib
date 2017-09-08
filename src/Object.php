@@ -15,7 +15,7 @@ use Zend\Json\Json;
  *
  * @package MSBios\Stdlib
  */
-abstract class Object
+abstract class Object implements ObjectInterface
 {
     /**
      * Original data
