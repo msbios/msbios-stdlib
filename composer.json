@@ -18,7 +18,8 @@
       "MSBios\\Stdlib\\": "src/"
     },
     "files": [
-      "functions.php"
+      "functions.php",
+      "helpers.php"
     ]
   },
   "autoload-dev": {
