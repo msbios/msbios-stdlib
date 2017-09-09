@@ -21,6 +21,11 @@ interface ObjectInterface extends \ArrayAccess
     public function setId($id);
 
     /**
+     * @return $this
+     */
+    public function getId();
+
+    /**
      *
      * @return void
      */

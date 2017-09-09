@@ -49,6 +49,14 @@ abstract class Object implements ObjectInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->getData('id');
+    }
+
+    /**
      * Initialize constructor
      *
      * @return void
