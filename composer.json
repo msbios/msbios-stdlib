@@ -29,11 +29,11 @@
   },
   "require": {
     "zendframework/zend-stdlib": "^3.1",
-    "zendframework/zend-json": "^3.0"
+    "msbios/json": "~1.0"
   },
   "require-dev": {
-    "zendframework/zend-test": "^3.1",
     "phpunit/phpunit": "^5.7",
+    "zendframework/zend-test": "^3.1",
     "squizlabs/php_codesniffer": "^3.0"
   },
   "scripts": {
@@ -41,8 +41,15 @@
     "cs-fix": "phpcbf",
     "test": [
       "@cs-check",
-      "phpunit"
+      "phpunit --colors=always"
     ],
-    "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
+    "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push",
+    "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+    "upload-coverage": "coveralls -v"
+  },
+  "extra": {
+    "zf": {
+      "component": "MSBios\\Voting\\Doctrine"
+    }
   }
 }

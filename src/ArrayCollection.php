@@ -95,8 +95,7 @@ class ArrayCollection implements
         return new static(array_diff(
             $this->items,
             $this->getArrayableItems($items)
-        )
-        );
+        ));
     }
 
     /**
