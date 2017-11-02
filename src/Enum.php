@@ -73,7 +73,7 @@ abstract class Enum
 
         /** @var string $className */
         $className = get_called_class();
-        self::_init($className, $name);
+        self::init($className, $name);
         return self::$enumInstances[$className][$name];
     }
 
@@ -168,7 +168,7 @@ abstract class Enum
      * @param $className
      * @param $name
      */
-    final private function _init($className, $name)
+    final private function init($className, $name)
     {
         if (! isset(self::$enumInstances[$className][$name])) {
             $value = constant($className . '::' . $name);

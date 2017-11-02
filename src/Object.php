@@ -393,7 +393,10 @@ abstract class Object implements ObjectInterface
                 return isset($this->data[$key]);
                 break;
         }
-        throw new InvalidArgumentException('Invalid method ' . get_class($this) . '::' . $method . '(' . print_r($args, 1) . ')');
+
+        throw new InvalidArgumentException(
+            'Invalid method ' . get_class($this) . '::' . $method . '(' . print_r($args, 1) . ')'
+        );
     }
 
     /**
