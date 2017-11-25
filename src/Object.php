@@ -7,15 +7,14 @@ namespace MSBios\Stdlib;
 
 use MSBios\Stdlib\Exception\InvalidArgumentException;
 use Zend\Json\Json;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * Class Object
- *
  * Abstract object, all classes are extends from it to automate accessors, generate xml, json or array.
- *
  * @package MSBios\Stdlib
  */
-abstract class Object implements ObjectInterface
+abstract class Object extends ArrayObject implements ObjectInterface
 {
     /**
      * Original data
@@ -44,7 +43,7 @@ abstract class Object implements ObjectInterface
      */
     public function setId($id)
     {
-        $this->setData('id', $id);
+        $this->offsetSet('id', $id);
         return $this;
     }
 
@@ -53,16 +52,18 @@ abstract class Object implements ObjectInterface
      */
     public function getId()
     {
-        return $this->getData('id');
+        return $this->offsetGet('id');
     }
 
     /**
-     * Initialize constructor
-     *
-     * @return void
+     * Object constructor.
+     * @param array $input
+     * @param int $flags
+     * @param string $iteratorClass
      */
-    public function __construct()
+    public function __construct(array $input = [], $flags = self::STD_PROP_LIST, $iteratorClass = 'ArrayIterator')
     {
+        parent::__construct($input, $flags, $iteratorClass);
         $this->init();
     }
 
@@ -88,7 +89,7 @@ abstract class Object implements ObjectInterface
          * @var mixed $value
          */
         foreach ($arr as $index => $value) {
-            $this->setData($index, $value);
+            $this->offsetSet($index, $value);
         }
         return $this;
     }
@@ -126,11 +127,12 @@ abstract class Object implements ObjectInterface
      */
     public function unsetData($key = null)
     {
-        if (is_null($key)) {
-            $this->data = [];
-        } else {
-            unset($this->data[$key]);
-        }
+        $this->offsetUnset($key);
+        // if (is_null($key)) {
+        //     $this->data = [];
+        // } else {
+        //     unset($this->data[$key]);
+        // }
 
         return $this;
     }
@@ -152,18 +154,32 @@ abstract class Object implements ObjectInterface
     public function getData($key = '', $index = null)
     {
         if ('' === $key) {
-            return $this->data;
+            return $this->getArrayCopy();
         }
+
+        /** @var null $default */
         $default = null;
+
         // accept a/b/c as ['a']['b']['c']
         // Not  !== false no need '/a/b always return null
         if (strpos($key, '/')) {
+
+            /** @var array $keyArray */
             $keyArray = explode('/', $key);
-            $data = $this->data;
+
+            /** @var array $data */
+            $data = $this->getArrayCopy();
+
+            /**
+             * @var int $i
+             * @var mixed $k
+             */
             foreach ($keyArray as $i => $k) {
-                if ($k === '') {
+
+                if ('' === $k) {
                     return $default;
                 }
+
                 if (is_array($data)) {
                     if (! isset($data[$k])) {
                         return $default;
@@ -171,20 +187,32 @@ abstract class Object implements ObjectInterface
                     $data = $data[$k];
                 }
             }
+
             return $data;
         }
+
         // legacy functionality for $index
-        if (isset($this->data[$key])) {
+        // if (isset($this->data[$key])) {
+        if ($this->offsetExists($key)) {
+
             if (is_null($index)) {
-                return $this->data[$key];
+                // return $this->data[$key];
+                return $this->offsetGet($key);
             }
-            $value = $this->data[$key];
+
+            // $value = $this->data[$key];
+            $value = $this->offsetGet($key);
+
             if (is_array($value)) {
+
                 if (isset($value[$index])) {
                     return $value[$index];
                 }
                 return null;
+
             } elseif (is_string($value)) {
+
+                /** @var array $array */
                 $array = explode(PHP_EOL, $value);
                 return (isset($array[$index])
                     && (! empty($array[$index])
@@ -192,8 +220,10 @@ abstract class Object implements ObjectInterface
             } elseif ($value instanceof Object) {
                 return $value->getData($index);
             }
+
             return $default;
         }
+
         return $default;
     }
 
@@ -207,10 +237,11 @@ abstract class Object implements ObjectInterface
      */
     public function hasData($key = '')
     {
-        if (empty($key) || ! is_string($key)) {
-            return ! empty($this->data);
-        }
-        return array_key_exists($key, $this->data);
+        //if (empty($key) || ! is_string($key)) {
+        //    return ! empty($this->data);
+        //}
+        //return array_key_exists($key, $this->data);
+        return $this->offsetExists($key);
     }
 
     /**
@@ -223,17 +254,20 @@ abstract class Object implements ObjectInterface
     public function __toArray(array $array = [])
     {
         if (empty($array)) {
-            return $this->data;
+            return $this->getArrayCopy();
         }
+
         /** @var array $result */
         $result = [];
+
         foreach ($array as $attr) {
-            if (isset($this->data[$attr])) {
-                $result[$attr] = $this->data[$attr];
+            if ($this->offsetExists($attr)) {
+                $result[$attr] = $this->offsetGet($attr);
             } else {
                 $result[$attr] = null;
             }
         }
+
         return $result;
     }
 
@@ -419,54 +453,54 @@ abstract class Object implements ObjectInterface
         return $result;
     }
 
-    /**
-     * Implementation of ArrayAccess::offsetSet()
-     *
-     * @param string $offset Offset
-     * @param mixed $value Value
-     *
-     * @return void
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->data[$offset] = $value;
-    }
+    ///**
+    // * Implementation of ArrayAccess::offsetSet()
+    // *
+    // * @param string $offset Offset
+    // * @param mixed $value Value
+    // *
+    // * @return void
+    // */
+    //public function offsetSet($offset, $value)
+    //{
+    //    $this->data[$offset] = $value;
+    //}
 
-    /**
-     * Implementation of ArrayAccess::offsetExists()
-     *
-     * @param string $offset Offset
-     *
-     * @return boolean
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->data[$offset]);
-    }
+    ///**
+    // * Implementation of ArrayAccess::offsetExists()
+    // *
+    // * @param string $offset Offset
+    // *
+    // * @return boolean
+    // */
+    //public function offsetExists($offset)
+    //{
+    //    return isset($this->data[$offset]);
+    //}
 
-    /**
-     * Implementation of ArrayAccess::offsetUnset()
-     *
-     * @param string $offset Offset
-     *
-     * @return void
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->data[$offset]);
-    }
+    ///**
+    // * Implementation of ArrayAccess::offsetUnset()
+    // *
+    // * @param string $offset Offset
+    // *
+    // * @return void
+    // */
+    //public function offsetUnset($offset)
+    //{
+    //    unset($this->data[$offset]);
+    //}
 
-    /**
-     * Implementation of ArrayAccess::offsetGet()
-     *
-     * @param string $offset Offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        return isset($this->data[$offset]) ? $this->data[$offset] : null;
-    }
+    ///**
+    // * Implementation of ArrayAccess::offsetGet()
+    // *
+    // * @param string $offset Offset
+    // *
+    // * @return mixed
+    // */
+    //public function offsetGet($offset)
+    //{
+    //    return isset($this->data[$offset]) ? $this->data[$offset] : null;
+    //}
 
     /**
      * Get Original data
@@ -493,7 +527,7 @@ abstract class Object implements ObjectInterface
     public function setOrigData($key = null, $data = null)
     {
         if (is_null($key)) {
-            $this->origData = $this->data;
+            $this->origData = $this->getArrayCopy();
         } else {
             $this->origData[$key] = $data;
         }
@@ -509,8 +543,9 @@ abstract class Object implements ObjectInterface
      */
     public function hasDataChangedFor($field)
     {
-        $newdata = $this->getData($field);
-        $origdata = $this->getOrigData($field);
-        return $newdata != $origdata;
+        /** @var array $newData */
+        $newData = $this->getData($field);
+        $origData = $this->getOrigData($field);
+        return $newData != $origData;
     }
 }
