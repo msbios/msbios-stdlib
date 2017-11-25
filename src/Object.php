@@ -175,7 +175,6 @@ abstract class Object extends ArrayObject implements ObjectInterface
              * @var mixed $k
              */
             foreach ($keyArray as $i => $k) {
-
                 if ('' === $k) {
                     return $default;
                 }
@@ -194,7 +193,6 @@ abstract class Object extends ArrayObject implements ObjectInterface
         // legacy functionality for $index
         // if (isset($this->data[$key])) {
         if ($this->offsetExists($key)) {
-
             if (is_null($index)) {
                 // return $this->data[$key];
                 return $this->offsetGet($key);
@@ -204,12 +202,10 @@ abstract class Object extends ArrayObject implements ObjectInterface
             $value = $this->offsetGet($key);
 
             if (is_array($value)) {
-
                 if (isset($value[$index])) {
                     return $value[$index];
                 }
                 return null;
-
             } elseif (is_string($value)) {
 
                 /** @var array $array */
