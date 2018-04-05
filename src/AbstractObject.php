@@ -10,11 +10,11 @@ use Zend\Json\Json;
 use Zend\Stdlib\ArrayObject;
 
 /**
- * Class Object
+ * Class AbstractObject
  * Abstract object, all classes are extends from it to automate accessors, generate xml, json or array.
  * @package MSBios\Stdlib
  */
-abstract class Object extends ArrayObject implements ObjectInterface
+abstract class AbstractObject extends ArrayObject implements ObjectInterface
 {
     /**
      * Original data
@@ -128,12 +128,6 @@ abstract class Object extends ArrayObject implements ObjectInterface
     public function unsetData($key = null)
     {
         $this->offsetUnset($key);
-        // if (is_null($key)) {
-        //     $this->data = [];
-        // } else {
-        //     unset($this->data[$key]);
-        // }
-
         return $this;
     }
 
@@ -191,7 +185,6 @@ abstract class Object extends ArrayObject implements ObjectInterface
         }
 
         // legacy functionality for $index
-        // if (isset($this->data[$key])) {
         if ($this->offsetExists($key)) {
             if (is_null($index)) {
                 // return $this->data[$key];
@@ -213,7 +206,7 @@ abstract class Object extends ArrayObject implements ObjectInterface
                 return (isset($array[$index])
                     && (! empty($array[$index])
                         || strlen($array[$index]) > 0)) ? $array[$index] : null;
-            } elseif ($value instanceof Object) {
+            } elseif ($value instanceof AbstractObject) {
                 return $value->getData($index);
             }
 
@@ -233,10 +226,6 @@ abstract class Object extends ArrayObject implements ObjectInterface
      */
     public function hasData($key = '')
     {
-        //if (empty($key) || ! is_string($key)) {
-        //    return ! empty($this->data);
-        //}
-        //return array_key_exists($key, $this->data);
         return $this->offsetExists($key);
     }
 
