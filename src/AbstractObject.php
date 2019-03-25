@@ -8,6 +8,7 @@ namespace MSBios\Stdlib;
 use MSBios\Stdlib\Exception\InvalidArgumentException;
 use Zend\Json\Json;
 use Zend\Stdlib\ArrayObject;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class AbstractObject
@@ -64,15 +65,10 @@ abstract class AbstractObject extends ArrayObject implements ObjectInterface
     public function __construct(array $input = [], $flags = self::STD_PROP_LIST, $iteratorClass = 'ArrayIterator')
     {
         parent::__construct($input, $flags, $iteratorClass);
-        $this->init();
-    }
 
-    /**
-     *
-     * @return void
-     */
-    public function init()
-    {
+        if ($this instanceof InitializableInterface) {
+            $this->init();
+        }
     }
 
     /**

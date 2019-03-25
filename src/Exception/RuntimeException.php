@@ -11,5 +11,5 @@ namespace MSBios\Stdlib\Exception;
  */
 class RuntimeException extends \RuntimeException
 {
-
+    // ...
 }

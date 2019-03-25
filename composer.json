@@ -42,7 +42,6 @@
       "phpunit --colors=always"
     ],
     "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-    "upload-coverage": "coveralls -v",
-    "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
+    "upload-coverage": "coveralls -v"
   }
 }

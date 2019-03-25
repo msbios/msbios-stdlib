@@ -13,5 +13,5 @@ use InvalidArgumentException as DefaultInvalidArgumentException;
  */
 class InvalidArgumentException extends DefaultInvalidArgumentException
 {
-
+    // ...
 }
