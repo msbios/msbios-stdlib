@@ -26,12 +26,6 @@ interface ObjectInterface extends \ArrayAccess
     public function getId();
 
     /**
-     *
-     * @return void
-     */
-    public function init();
-
-    /**
      * Add data to the object.
      * Retains previous data in the object.
      *
