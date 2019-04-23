@@ -29,6 +29,7 @@
   },
   "require": {
     "zendframework/zend-stdlib": "^3.1",
+    "php-slang/php-slang": "^0.1",
     "msbios/json": "^1.0"
   },
   "require-dev": {

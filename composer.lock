@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76e81f17df599bdff2f6a974d2efff34",
+    "content-hash": "3e46ee6c28b090c9b4faa26707b6d7c5",
     "packages": [
         {
             "name": "msbios/json",
@@ -148,6 +148,66 @@
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
             "time": "2019-02-21T12:16:21+00:00"
+        },
+        {
+            "name": "php-slang/php-slang",
+            "version": "v0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-slang/php-slang.git",
+                "reference": "a65305b8a567c2449f7c4af4f6dec705f01a7345"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-slang/php-slang/zipball/a65305b8a567c2449f7c4af4f6dec705f01a7345",
+                "reference": "a65305b8a567c2449f7c4af4f6dec705f01a7345",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.0"
+            },
+            "require-dev": {
+                "humbug/humbug": "~1.0@dev",
+                "phpunit/phpunit": "~5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PhpSlang\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Witold Adamus",
+                    "email": "witold.adamus@xsolve.pl"
+                }
+            ],
+            "description": "PHPSlang is a library that allow you to write a purely functional code in PHP",
+            "keywords": [
+                "collections",
+                "either",
+                "fp",
+                "functionalprogramming",
+                "future",
+                "immutability",
+                "immutable",
+                "lazy",
+                "monad",
+                "option",
+                "parallel",
+                "patternmatching",
+                "propertytesting",
+                "purelyfunctional",
+                "touple",
+                "trampolines",
+                "try",
+                "validation"
+            ],
+            "time": "2017-02-07T09:50:50+00:00"
         },
         {
             "name": "psr/container",
