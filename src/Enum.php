@@ -5,7 +5,7 @@
  */
 namespace MSBios\Stdlib;
 
-use MSBios\Stdlib\Exception\RuntimeException;
+use MSBios\Stdlib\Exception\EnumException;
 use ReflectionClass;
 
 /**
@@ -18,28 +18,20 @@ use ReflectionClass;
 abstract class Enum
 {
     /**
-     * @var array ReflectionClass
+     * @var ReflectionClass[]
      */
     protected static $reflectorInstances = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected static $enumInstances = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected static $foundNameValueLink = [];
 
-    /**
-     * @var
-     */
+    /** @var array */
     protected $name;
 
-    /**
-     * @var
-     */
+    /** @var array */
     protected $value;
 
     /**
@@ -68,7 +60,7 @@ abstract class Enum
         $name = self::nameOf($value);
 
         if ($name === false) {
-            throw new RuntimeException("Unknown constant!");
+            throw new EnumException("Unknown constant by name {$name}!");
         }
 
         /** @var string $className */
