@@ -24,12 +24,12 @@ abstract class AbstractObject extends ArrayObject implements ObjectInterface
      */
     protected $origData;
 
-    /**
-     * Object attributes
-     *
-     * @var array
-     */
-    protected $data = [];
+    // /**
+    //  * Object attributes
+    //  *
+    //  * @var array
+    //  */
+    // protected $data = [];
 
     /**
      * Setter/Getter underscore transformation cache
@@ -69,6 +69,8 @@ abstract class AbstractObject extends ArrayObject implements ObjectInterface
         if ($this instanceof InitializableInterface) {
             $this->init();
         }
+
+        $this->setOrigData();
     }
 
     /**
@@ -105,9 +107,9 @@ abstract class AbstractObject extends ArrayObject implements ObjectInterface
     public function setData($key, $value = null)
     {
         if (is_array($key)) {
-            $this->data = $key;
+            $this->storage = $key;
         } else {
-            $this->data[$key] = $value;
+            $this->offsetSet($key, $value);
         }
 
         return $this;
@@ -390,22 +392,19 @@ abstract class AbstractObject extends ArrayObject implements ObjectInterface
         switch (substr($method, 0, 3)) {
             case 'get':
                 $key = $this->underscore(substr($method, 3));
-                $data = $this->getData($key, isset($args[0]) ? $args[0] : null);
-                return $data;
+                return $this->getData($key, isset($args[0]) ? $args[0] : null);
                 break;
             case 'set':
                 $key = $this->underscore(substr($method, 3));
-                $result = $this->setData($key, isset($args[0]) ? $args[0] : null);
-                return $result;
+                return $this->setData($key, isset($args[0]) ? $args[0] : null);
                 break;
             case 'uns':
                 $key = $this->underscore(substr($method, 3));
-                $result = $this->unsetData($key);
-                return $result;
+                return $this->unsetData($key);
                 break;
             case 'has':
                 $key = $this->underscore(substr($method, 3));
-                return isset($this->data[$key]);
+                return $this->hasData($key);
                 break;
         }
 

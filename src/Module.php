@@ -12,5 +12,5 @@ namespace MSBios\Stdlib;
 class Module
 {
     /** @var string  */
-    const VERSION = '1.0.11';
+    const VERSION = '1.0.12';
 }
