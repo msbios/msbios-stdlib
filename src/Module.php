@@ -9,7 +9,7 @@ namespace MSBios\Stdlib;
  * Class Module
  * @package MSBios\Stdlib
  */
-class Module
+class Module extends \MSBios\Module
 {
     /** @var string */
     const VERSION = '1.0.14';
