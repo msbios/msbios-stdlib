@@ -12,7 +12,7 @@ use Zend\Json\Json;
  * Interface ObjectInterface
  * @package MSBios\Stdlib
  */
-interface ObjectInterface extends \ArrayAccess
+interface ObjectInterface
 {
     /**
      * @param $id
@@ -133,43 +133,6 @@ interface ObjectInterface extends \ArrayAccess
      * @return string
      */
     public function toString($format = '');
-
-    /**
-     * Implementation of ArrayAccess::offsetSet()
-     *
-     * @param string $offset Offset
-     * @param mixed $value Value
-     *
-     * @return void
-     */
-    public function offsetSet($offset, $value);
-
-    /**
-     * Implementation of ArrayAccess::offsetExists()
-     *
-     * @param string $offset Offset
-     *
-     * @return boolean
-     */
-    public function offsetExists($offset);
-
-    /**
-     * Implementation of ArrayAccess::offsetUnset()
-     *
-     * @param string $offset Offset
-     *
-     * @return void
-     */
-    public function offsetUnset($offset);
-
-    /**
-     * Implementation of ArrayAccess::offsetGet()
-     *
-     * @param string $offset Offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset);
 
     /**
      * Get Original data
