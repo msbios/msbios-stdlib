@@ -53,13 +53,14 @@ abstract class Enum
     /**
      * @param $value
      * @return mixed
+     * @throws EnumException
      */
     final public static function get($value)
     {
         /** @var string $name */
         $name = self::nameOf($value);
 
-        if ($name === false) {
+        if (false === $name) {
             throw new EnumException("Unknown constant by name {$name}!");
         }
 
