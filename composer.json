@@ -34,6 +34,8 @@
     "ext-json": "*"
   },
   "require-dev": {
+    "msbios/test": "^2.0",
+    "msbios/debug": "^2.0"
   },
   "scripts": {
     "cs-check": "phpcs",
