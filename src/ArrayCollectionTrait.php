@@ -5,7 +5,7 @@
  */
 namespace MSBios\Stdlib;
 
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * Class ArrayCollectionTrait

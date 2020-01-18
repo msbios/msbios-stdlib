@@ -6,8 +6,8 @@
 
 namespace MSBios\Stdlib;
 
+use Laminas\Stdlib\ArrayObject;
 use MSBios\Stdlib\Exception\RuntimeException;
-use Zend\Stdlib\ArrayObject;
 
 /**
  * Class Registry

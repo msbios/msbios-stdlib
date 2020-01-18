@@ -31,11 +31,9 @@
     "php-slang/php-slang": "^0.1",
     "patchwork/utf8": "^1.3",
     "msbios/json": "^2.0",
-    "msbios/exception": "^1.0"
+    "ext-json": "*"
   },
   "require-dev": {
-    "msbios/test": "^1.0",
-    "laminas/laminas-migration": "^1.0"
   },
   "scripts": {
     "cs-check": "phpcs",

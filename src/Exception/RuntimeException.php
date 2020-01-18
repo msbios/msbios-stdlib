@@ -9,7 +9,7 @@ namespace MSBios\Stdlib\Exception;
  * Class RuntimeException
  * @package MSBios\Stdlib\Exception
  */
-class RuntimeException extends \RuntimeException
+class RuntimeException extends \MSBios\Exception\RuntimeException
 {
     // ...
 }

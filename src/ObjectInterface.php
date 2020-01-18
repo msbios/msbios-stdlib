@@ -5,9 +5,6 @@
  */
 namespace MSBios\Stdlib;
 
-use MSBios\Stdlib\Exception\InvalidArgumentException;
-use Zend\Json\Json;
-
 /**
  * Interface ObjectInterface
  * @package MSBios\Stdlib

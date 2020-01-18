@@ -9,7 +9,7 @@ namespace MSBios\Stdlib\Exception;
  * Class Exception
  * @package MSBios\Stdlib\Exception
  */
-class Exception extends \Exception
+class Exception extends \MSBios\Exception\Exception
 {
     // ...
 }

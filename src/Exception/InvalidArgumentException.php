@@ -5,13 +5,11 @@
  */
 namespace MSBios\Stdlib\Exception;
 
-use InvalidArgumentException as DefaultInvalidArgumentException;
-
 /**
  * Class InvalidArgumentException
  * @package MSBios\Stdlib\Exception
  */
-class InvalidArgumentException extends DefaultInvalidArgumentException
+class InvalidArgumentException extends \MSBios\Exception\InvalidArgumentException
 {
     // ...
 }

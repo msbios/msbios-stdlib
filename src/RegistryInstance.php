@@ -7,7 +7,6 @@
 namespace MSBios\Stdlib;
 
 use MSBios\Stdlib\Exception\RuntimeException;
-use Zend\Stdlib\ArrayObject;
 
 /**
  * Interface RegistryInstance
